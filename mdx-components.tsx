@@ -1,8 +1,16 @@
-import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
+import type { ReactNode } from 'react'
+import { useMDXComponents as getBlogMDXComponents } from 'nextra-theme-blog'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useMDXComponents(components: Record<string, any>): Record<string, any> {
+export function useMDXComponents(components: Record<string, any>) {
+  const { wrapper: BlogWrapper, ...rest } = getBlogMDXComponents(components)
+
   return {
-    ...getDocsMDXComponents(components),
+    ...rest,
+    wrapper: ({ children, metadata }: { children: ReactNode; metadata: Record<string, any> }) => {
+      if (metadata?.layout === 'raw') {
+        return <>{children}</>
+      }
+      return <BlogWrapper metadata={metadata}>{children}</BlogWrapper>
+    },
   }
 }

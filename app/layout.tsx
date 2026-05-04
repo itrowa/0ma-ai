@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react'
-import { Layout, Navbar, Footer } from 'nextra-theme-docs'
+import { Footer } from 'nextra-theme-blog'
 import { Head } from 'nextra/components'
-import { getPageMap } from 'nextra/page-map'
-import 'nextra-theme-docs/style.css'
+import { ThemeProvider } from 'next-themes'
+import { Link, ViewTransitions } from 'next-view-transitions'
+import 'nextra-theme-blog/style.css'
 
 export const metadata = {
   metadataBase: new URL('https://0ma.ai'),
@@ -18,35 +19,39 @@ export const metadata = {
   },
 }
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const pageMap = await getPageMap()
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="zh" suppressHydrationWarning>
       <Head />
       <body>
-        <Layout
-          navbar={
-            <Navbar
-              logo={
-                <span style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em' }}>
-                  0ma.ai
-                </span>
-              }
-              logoLink="/"
-            />
-          }
-          pageMap={pageMap}
-          docsRepositoryBase="https://github.com/acesolo/0ma-ai"
-          editLink={null}
-          feedback={{ content: null }}
-          footer={
-            <Footer>
-              <span>© {new Date().getFullYear()} 0ma.ai · Zero-man Agency</span>
-            </Footer>
-          }
-        >
-          {children}
-        </Layout>
+        <ThemeProvider attribute="class">
+          <div
+            style={{
+              maxWidth: '48rem',
+              margin: '0 auto',
+              padding: '2rem 1.5rem',
+            }}
+          >
+            <ViewTransitions>
+              <header
+                className="x:mb-8 x:flex x:items-center x:gap-3"
+                style={{ justifyContent: 'flex-end' }}
+                data-pagefind-ignore="all"
+              >
+                <Link href="/blog">Blog</Link>
+                <Link href="/club">零人公司俱乐部</Link>
+              </header>
+              <article
+                className="x:prose x:max-md:prose-sm x:dark:prose-invert"
+                dir="ltr"
+                data-pagefind-body
+              >
+                {children}
+              </article>
+            </ViewTransitions>
+            <Footer>© {new Date().getFullYear()} 0ma.ai · Zero-man Agency</Footer>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   )
