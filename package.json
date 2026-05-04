@@ -23,5 +23,14 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "typescript": "^6.0.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itrowa/0ma-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/itrowa/0ma-ai/issues"
+  },
+  "homepage": "https://github.com/itrowa/0ma-ai#readme"
 }
