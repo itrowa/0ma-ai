@@ -38,8 +38,28 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 style={{ justifyContent: 'flex-end' }}
                 data-pagefind-ignore="all"
               >
-                <Link href="/blog">Blog</Link>
-                <Link href="/club">零人公司俱乐部</Link>
+                <Link
+                  href="/blog"
+                  style={{
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    fontWeight: 500,
+                    opacity: 0.75,
+                  }}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/club"
+                  style={{
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    fontWeight: 500,
+                    opacity: 0.75,
+                  }}
+                >
+                  零人公司俱乐部
+                </Link>
               </header>
               <article
                 className="x:prose x:max-md:prose-sm x:dark:prose-invert"
